@@ -21,13 +21,13 @@
     
     <!-- Navigation -->
     <nav>
-      <button onclick="showSection('dashboard')" class="active">Tableau de bord</button>
-      <button onclick="showSection('clients')">Clients</button>
-      <button onclick="showSection('projects')">Projets</button>
-      <button onclick="showSection('tasks')">Tâches</button>
-      <button onclick="showSection('finances')">Finances</button>
-      <button onclick="showSection('calendar')">Calendrier</button>
-      <button onclick="showSection('documents')">Documents</button>
+      <button onclick="window.App.showSection('dashboard')" class="active">Tableau de bord</button>
+      <button onclick="window.App.showSection('clients')">Clients</button>
+      <button onclick="window.App.showSection('projects')">Projets</button>
+      <button onclick="window.App.showSection('tasks')">Tâches</button>
+      <button onclick="window.App.showSection('finances')">Finances</button>
+      <button onclick="window.App.showSection('calendar')">Calendrier</button>
+      <button onclick="window.App.showSection('documents')">Documents</button>
     </nav>
 
     <!-- Tableau de bord -->
@@ -94,7 +94,7 @@
       
       <div class="search-bar">
         <input type="text" id="clientSearchInput" placeholder="Rechercher un client...">
-        <button onclick="searchClients()">Rechercher</button>
+        <button onclick="window.EntityManager.searchClients()">Rechercher</button>
       </div>
       
       <form id="clientForm">
@@ -151,18 +151,18 @@
       
       <div class="search-bar">
         <input type="text" id="projectSearchInput" placeholder="Rechercher un projet...">
-        <button onclick="searchProjects()">Rechercher</button>
+        <button onclick="window.EntityManager.searchProjects()">Rechercher</button>
       </div>
       
       <div class="filter-options">
-        <select id="projectStatusFilter" onchange="filterProjects()">
+        <select id="projectStatusFilter" onchange="window.EntityManager.filterProjects()">
           <option value="">Tous les statuts</option>
           <option value="En cours">En cours</option>
           <option value="Terminé">Terminé</option>
           <option value="En attente">En attente</option>
         </select>
         
-        <select id="projectClientFilter" onchange="filterProjects()">
+        <select id="projectClientFilter" onchange="window.EntityManager.filterProjects()">
           <option value="">Tous les clients</option>
         </select>
       </div>
@@ -244,22 +244,22 @@
       
       <div class="search-bar">
         <input type="text" id="taskSearchInput" placeholder="Rechercher une tâche...">
-        <button onclick="searchTasks()">Rechercher</button>
+        <button onclick="window.TaskDocManager.searchTasks()">Rechercher</button>
       </div>
       
       <div class="filter-options">
-        <select id="taskPriorityFilter" onchange="filterTasks()">
+        <select id="taskPriorityFilter" onchange="window.TaskDocManager.filterTasks()">
           <option value="">Toutes les priorités</option>
           <option value="Haute">Haute</option>
           <option value="Moyenne">Moyenne</option>
           <option value="Basse">Basse</option>
         </select>
         
-        <select id="taskProjectFilter" onchange="filterTasks()">
+        <select id="taskProjectFilter" onchange="window.TaskDocManager.filterTasks()">
           <option value="">Tous les projets</option>
         </select>
         
-        <select id="taskStatusFilter" onchange="filterTasks()">
+        <select id="taskStatusFilter" onchange="window.TaskDocManager.filterTasks()">
           <option value="">Tous les statuts</option>
           <option value="À faire">À faire</option>
           <option value="En cours">En cours</option>
@@ -332,18 +332,18 @@
       
       <div class="search-bar">
         <input type="text" id="financeSearchInput" placeholder="Rechercher une transaction...">
-        <button onclick="searchFinances()">Rechercher</button>
+        <button onclick="window.DashboardManager.searchFinances()">Rechercher</button>
       </div>
       
       <div class="filter-options">
-        <select id="financeTypeFilter" onchange="filterFinances()">
+        <select id="financeTypeFilter" onchange="window.DashboardManager.filterFinances()">
           <option value="">Tous les types</option>
           <option value="Facture">Facture</option>
           <option value="Paiement">Paiement</option>
           <option value="Dépense">Dépense</option>
         </select>
         
-        <select id="financeProjectFilter" onchange="filterFinances()">
+        <select id="financeProjectFilter" onchange="window.DashboardManager.filterFinances()">
           <option value="">Tous les projets</option>
         </select>
       </div>
@@ -410,9 +410,9 @@
       
       <div class="calendar-container">
         <div class="calendar-header">
-          <button onclick="prevMonth()">&lt; Mois précédent</button>
+          <button onclick="window.DashboardManager.prevMonth()">&lt; Mois précédent</button>
           <h3 id="currentMonthYear">Mai 2025</h3>
-          <button onclick="nextMonth()">Mois suivant &gt;</button>
+          <button onclick="window.DashboardManager.nextMonth()">Mois suivant &gt;</button>
         </div>
         
         <div class="calendar-grid" id="calendarGrid">
@@ -422,7 +422,7 @@
       
       <div class="modal" id="eventModal">
         <div class="modal-content">
-          <span class="close" onclick="closeEventModal()">&times;</span>
+          <span class="close" onclick="window.DashboardManager.closeEventModal()">&times;</span>
           <h3>Ajouter un événement</h3>
           
           <form id="eventForm">
@@ -478,11 +478,11 @@
       
       <div class="search-bar">
         <input type="text" id="documentSearchInput" placeholder="Rechercher un document...">
-        <button onclick="searchDocuments()">Rechercher</button>
+        <button onclick="window.TaskDocManager.searchDocuments()">Rechercher</button>
       </div>
       
       <div class="filter-options">
-        <select id="documentTypeFilter" onchange="filterDocuments()">
+        <select id="documentTypeFilter" onchange="window.TaskDocManager.filterDocuments()">
           <option value="">Tous les types</option>
           <option value="Plan">Plan</option>
           <option value="Contrat">Contrat</option>
@@ -491,7 +491,7 @@
           <option value="Autre">Autre</option>
         </select>
         
-        <select id="documentProjectFilter" onchange="filterDocuments()">
+        <select id="documentProjectFilter" onchange="window.TaskDocManager.filterDocuments()">
           <option value="">Tous les projets</option>
         </select>
       </div>
@@ -555,7 +555,7 @@
   <!-- Modales pour édition -->
   <div class="modal" id="editClientModal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('editClientModal')">&times;</span>
+      <span class="close" onclick="window.App.closeModal('editClientModal')">&times;</span>
       <h3>Modifier le client</h3>
       
       <form id="editClientForm">
@@ -608,7 +608,7 @@
   
   <div class="modal" id="editProjectModal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('editProjectModal')">&times;</span>
+      <span class="close" onclick="window.App.closeModal('editProjectModal')">&times;</span>
       <h3>Modifier le projet</h3>
       
       <form id="editProjectForm">
@@ -684,7 +684,7 @@
   
   <div class="modal" id="editTaskModal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('editTaskModal')">&times;</span>
+      <span class="close" onclick="window.App.closeModal('editTaskModal')">&times;</span>
       <h3>Modifier la tâche</h3>
       
       <form id="editTaskForm">
@@ -751,6 +751,11 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
   
-  <script src="script.js"></script>
+  <!-- Scripts de l'application -->
+  <script src="js/core.js"></script>
+  <script src="js/entities.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/compatibility.js"></script>
 </body>
 </html>
